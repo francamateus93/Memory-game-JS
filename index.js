@@ -1,117 +1,113 @@
 // holds the deck of cards for the game
 let cards = [];
+let flippedCards = [];
+let matchedCards = 0;
 
 // generates a new deck of cards, with size / 2 pairs, and shuffled
 function generateCards(size) {
-  for (let i = 1; i <= size * size / 2; i++) {
-    cards.push({ id: `card-${i}`, value: i });
-    cards.push({ id: `card-${i}`, value: i });
-  }
+    cards = [];
+    for (let i = 1; i <= size / 2; i++) {
+        cards.push({ id: `${i}a`, value: i, flipped: false, matched: false });
+        cards.push({ id: `${i}b`, value: i, flipped: false, matched: false });
+    }
+    shuffle(cards);
 }
 
 // shuffles an array
 function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    let temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-  }
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
 }
 
 // flips a card by id
 function flipCard(id) {
-  const card = document.getElementById(id);
-  const cardObj = cards.find((c) => c.id === id);
-  if (cardObj.flipped) return;
-  if (cards.filter((c) => c.flipped).length >= 2) return;
-  card.classList.toggle("flipped");
-  cardObj.flipped = true;
+    const card = cards.find(card => card.id === id);
+    if (card && !card.flipped && flippedCards.length < 2) {
+        card.flipped = true;
+        flippedCards.push(card);
+        updateCards();
+        if (flippedCards.length === 2) {
+            checkMatched();
+        }
+    }
 }
 
 // marks any flipped cards as matched if they match
 function checkMatched() {
-  const flippedCards = cards.filter((card) => card.flipped);
-  if (flippedCards.length < 2) return;
-  const pairFound = false;
-  for (let i = 0; i < flippedCards.length - 1; i++) {
-    const card1 = flippedCards[i];
-    for (let j = i + 1; j < flippedCards.length; j++) {
-      const card2 = flippedCards[j];
-      if (card1.value === card2.value) {
-        pairFound = true;
-        card1.matched = true;
-        card2.matched = true;
-      }
+    if (flippedCards[0].value === flippedCards[1].value) {
+        flippedCards.forEach(card => card.matched = true);
+        matchedCards += 2;
+        flippedCards = [];
+        checkWin();
+    } else {
+        setTimeout(flipBack, 1000);
     }
-  }
-  if (pairFound) {
-    setTimeout(() => {
-      flipBack();
-    }, 1000);
-  }
 }
 
 // shows a message if the game is over
 function checkWin() {
-  const matchedCards = cards.filter((card) => card.matched);
-  if (matchedCards.length === cards.length / 2) {
-    alert("Congratulations! You won!");
-    createGame(4);
-  }
+    if (matchedCards === cards.length) {
+        alert('¡Felicidades! Has encontrado todas las parejas.');
+    }
 }
 
 // sets all flipped props to false except for the matched ones
 function flipBack() {
-  const flippedCards = cards.filter((card) => card.flipped);
-  flippedCards.forEach((card) => {
-    card.flipped = false;
-    if (!card.matched) document.getElementById(card.id).classList.remove("flipped");
-  });
+    flippedCards.forEach(card => card.flipped = false);
+    flippedCards = [];
+    updateCards();
 }
 
 // handles the click on a card
-function handleCardClick(id) {
-  flipCard(id);
+function handleCardClick(event) {
+    const id = event.currentTarget.dataset.id;
+    flipCard(id);
 }
 
 // creates the DOM elements for the cards
 function showCards() {
-  const gridContainer = document.getElementById("grid");
-  cards.forEach((card) => {
-    const cardElement = document.createElement("div");
-    cardElement.className = "card";
-    gridContainer.appendChild(cardElement);
-    // add front and back elements to the card
-    const frontElement = document.createElement("div");
-    frontElement.className = "front";
-    frontElement.style.backgroundImage = `url('images/${card.value}.png')`;
-    cardElement.appendChild(frontElement);
-    const backElement = document.createElement("div");
-    backElement.className = "back";
-    backElement.style.backgroundImage = `url('images/back.png')`;
-    cardElement.appendChild(backElement);
-  });
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
+    cards.forEach(card => {
+        const cardElement = document.createElement('div');
+        cardElement.classList.add('card');
+        cardElement.dataset.id = card.id;
+        cardElement.innerHTML = `
+            <div class="front">${card.value}</div>
+            <div class="back"></div>
+        `;
+        cardElement.addEventListener('click', handleCardClick);
+        grid.appendChild(cardElement);
+    });
 }
 
 // updates the classes on the card DOM elements based on the state of the cards
 function updateCards() {
-  cards.forEach((card) => {
-    const cardElement = document.getElementById(card.id);
-    if (card.matched) cardElement.classList.add("matched");
-  });
+    cards.forEach(card => {
+        const cardElement = document.querySelector(`.card[data-id="${card.id}"]`);
+        if (card.flipped) {
+            cardElement.classList.add('flipped');
+        } else {
+            cardElement.classList.remove('flipped');
+        }
+        if (card.matched) {
+            cardElement.classList.add('matched');
+        }
+    });
 }
 
 // initializes the game
 function createGame(size) {
-  generateCards(size);
-  shuffle(cards);
+    generateCards(size);
+    showCards();
+    matchedCards = 0;
+    flippedCards = [];
 }
 
-// calls createGame when the page loads
-createGame(4);
+// Event listener for new game button
+document.getElementById('new-game').addEventListener('click', () => createGame(16));
 
-// adds event listener to the grid container to handle card clicks
-document.getElementById("grid").addEventListener("click", (event) => {
-  handleCardClick(event.target.id);
-});
+// INITIALIZE THE GAME WHEN THE PAGE LOADS
+createGame(16);

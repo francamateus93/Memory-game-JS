@@ -4,9 +4,13 @@
 
 @layer components {
   .card {
-    position: relative;
+    
   }
   
+  .backface-visibility {
+      backface-visibility: hidden;
+  }
+
   .card .back {
     position: absolute;
   }
@@ -22,4 +26,6 @@
   .flipper.front {
     transform: rotateY(0deg);
   }
+
+
 }

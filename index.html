@@ -8,13 +8,23 @@
    <link href="output.css" rel="stylesheet" />
   </head>
 
-  <body>
-    <div id="grid" class="grid"></div>
-    <button id="new-game-button">New Game</button>
+  <body class="bg-gradient-to-r from-slate-900 to-slate-800">
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <div id="js-container" class=" h-screen bg-slate-200 flex flex-col flex-wrap items-center justify-evenly">
+
+      <div id="js-game" class="bg-slate-400 flex flex-wrap items-center justify-center">
+
+        <div id="js-card" class="card w-36 h-48 m-4 relative transition-transform active:rotate-180">
+
+          <div class="rounded-2xl flex items-center justify-center absolute pointer-events-none backface-visibility">
+
+            <div class="back">back</div>
+            <div class="face">face</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script type="text/javascript" src="index.js"></script>
   </body>

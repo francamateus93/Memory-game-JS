@@ -4,5 +4,22 @@
 
 @layer components {
   .card {
+    position: relative;
+  }
+  
+  .card .back {
+    position: absolute;
+  }
+  
+  .card .front {
+    position: absolute;
+  }
+  
+  .flipper {
+    transform: rotateY(180deg);
+  }
+  
+  .flipper.front {
+    transform: rotateY(0deg);
   }
 }

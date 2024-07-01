@@ -58,7 +58,6 @@ function checkWin() {
   alert("¡Felicidades! Has ganado el juego!");
 }
 
-
 // sets all flipped props to false except for the matched ones
 function flipBack() {
   setTimeout(() => {
@@ -73,7 +72,6 @@ function flipBack() {
 
 // handles the click on a card
 document.addEventListener("click", (event) => {
-
   if (event.target.classList.contains("card")) {
     flipCard(event.target.id);
     handleCardClick(event.target.id);

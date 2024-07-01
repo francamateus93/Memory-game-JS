@@ -4,23 +4,6 @@
 
 @layer components {
 
-  .container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-
-  .game {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content:center;
-    /* background-color: beige; */
-  }
-
   .card {
     width: 9rem;
     height: 12rem;
@@ -30,7 +13,7 @@
     transform-style: preserve-3d;
   }
 
-  .cardDiv {
+  .card div {
     width: 100%;
     height: 100%;
     display: flex;
@@ -38,25 +21,24 @@
     justify-content: center;
     position: absolute;
     backface-visibility: hidden;
-    pointer-events: none;
+    /* pointer-events: none; */
     border-radius: 1rem;
   }
 
-  .rotateY-180 {
-    transform: rotateY(180deg);
+  .card :active {
+    transform: rotateY( 180deg );
   }
 
-  .cardFace {
-   background: #05d1fe;
-   transform: rotateY( 180deg );
-   color: black;
-   font-size: 4rem;
-  }
+  .card .face {
+    background: #05d1fe;
+    transform: rotateY( 180deg );
+    color: black;
+    font-size: 6rem;
+ }
+ 
+ .card .back {
+    border: 3px solid #05d1fe;
+    background: url(img/img1.png) center / contain no-repeat;
+ }
 
-.cardBack {
-  font-size: 4rem;
-  border: 3px solid #05d1fe;
-  font-size: 4rem;
-  /* background: url(img/img2.png) center / contain no-repeat; */
-}
 }

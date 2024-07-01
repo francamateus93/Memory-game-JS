@@ -21,12 +21,12 @@
     justify-content: center;
     position: absolute;
     backface-visibility: hidden;
-    /* pointer-events: none; */
+    pointer-events: none;
     border-radius: 1rem;
   }
 
   .card :active {
-    transform: rotateY( 180deg );
+    transform: rotateY(180deg);
   }
 
   .card .face {

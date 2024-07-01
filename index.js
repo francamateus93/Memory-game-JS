@@ -1,23 +1,67 @@
-const totalCards = 12; // total de cards
-// const availableCards = ['A', 'K', 'Q', 'J'];
+const totalCards = 12;
+const availableCards = ['A', 'K', 'Q', 'J'];
+let cards = [];
+let selectedCards = [];
+let valuesUsed = [];
+let currentMove = 0;
+let currentAttempts = 0;
 
-let cards = []; // cards creados
-let selectedCards = []; // cards selecionados
-let valuesUsed = []; // valores de los cards
-let currentMove = 0; // movimiento actual
-let currentAttempts = 0; // tentativas actuales
-
-// define una variavel para DIV
 let cardTemplate = '<div class="card"><div class="back"></div><div class="face"></div></div>';
 
-for (let i=0; i < totalCards; i++) { // iteracion para crear cada carta
+function activate(e) {
+   if (currentMove < 2) {
+      
+      if ((!selectedCards[0] || selectedCards[0] !== e.target) && !e.target.classList.contains('active') ) {
+         e.target.classList.add('active');
+         selectedCards.push(e.target);
 
-  let div = document.createElement('div'); // crea un 'div' en html
+         if (++currentMove == 2) {
 
-  div.innerHTML = cardTemplate; // añade al 'div' los cards template
+            currentAttempts++;
+            document.querySelector('#js-stats').innerHTML = currentAttempts + ' intentos';
 
-  cards.push(div); // añade el 'div' al array cards
+            if (selectedCards[0].querySelectorAll('.face')[0].innerHTML == selectedCards[1].querySelectorAll('.face')[0].innerHTML) {
+               selectedCards = [];
+               currentMove = 0;
+            }
+            else {
+               setTimeout(() => {
+                  selectedCards[0].classList.remove('active');
+                  selectedCards[1].classList.remove('active');
+                  selectedCards = [];
+                  currentMove = 0;
+               }, 600);
+            }
+         }
+      }
+   }
+}
 
-  document.querySelector('#js-game').append(cards[i]); // añade al GAME el array com cartas creadas
-  // 
+function randomValue() {
+   let rnd = Math.floor(Math.random() * totalCards * 0.5);
+   let values = valuesUsed.filter(value => value === rnd);
+   if (values.length < 2) {
+      valuesUsed.push(rnd);
+   }
+   else {
+      randomValue();
+   }
+}
+
+function getFaceValue(value) {
+   let rtn = value;
+   if (value < availableCards.length) {
+      rtn = availableCards[value];
+   }
+   return rtn;
+}
+
+for (let i=0; i < totalCards; i++) {
+   let div = document.createElement('div');
+  //  div.innerHTML = cardTemplate;
+   cards.push(div);
+   document.querySelector('#js-game').append(cards[i]);
+   randomValue();
+   cards[i].querySelectorAll('.face')[0].innerHTML = getFaceValue(valuesUsed[i]);
+   cards[i].querySelectorAll('.card')[0].addEventListener('click', activate);
 }

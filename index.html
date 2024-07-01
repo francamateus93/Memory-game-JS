@@ -10,16 +10,16 @@
 
   <body class="bg-gradient-to-r from-slate-900 to-slate-800">
 
-    <div id="js-container" class=" h-screen bg-slate-200 flex flex-col flex-wrap items-center justify-evenly">
+    <div id="js-container" class="container">
 
-      <div id="js-game" class="bg-slate-400 flex flex-wrap items-center justify-center">
+      <div id="js-game" class="game">
 
-        <div id="js-card" class="card w-36 h-48 m-4 relative transition-transform active:rotate-180">
+        <div id="js-card" class="card active:rotateY-180">
 
-          <div class="rounded-2xl flex items-center justify-center absolute pointer-events-none backface-visibility">
+          <div class="cardDiv">
 
-            <div class="back">back</div>
-            <div class="face">face</div>
+            <div class="cardFace"></div>
+            <div class="cardBack"></div>
 
           </div>
         </div>

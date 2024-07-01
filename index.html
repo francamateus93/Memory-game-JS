@@ -8,17 +8,14 @@
    <link href="output.css" rel="stylesheet" />
   </head>
 
-  <body class="bg-gradient-to-b from-slate-900 to-slate-700">
+  <body class="bg-gradient-to-b flex items-center justify-center from-slate-900 to-slate-700 h-screen">
 
-    <!-- STATS -->
-    <div id="stats" class="text-white absolute p-4 text-center w-[100%] text-5xl">0 intentos</div>
+    <div class="flex flex-col flex-wrap items-center justify-center content-center p-10">
+      
+      <h1 class="text-4xl text-white">MEMORY GAME</h1>
+      <div id="grid" class="gridGame p-3 w-96 h-96 my-3"></div>
+      <button class="py-2 px-5 bg-gray-800 text-white rounded tracking-widest text-sm hover:bg-slate-700">Reset</button>
 
-    <!-- WRAPPER -->
-    <div id="wrapper" class="h-screen flex flex-col flex-wrap items-center justify-evenly">
-
-      <!-- GAME -->
-      <div id="game" class="h-screen max-h-[700px] flex flex-wrap items-center justify-center">
-      </div>
     </div>
 
     <script type="text/javascript" src="index.js"></script>

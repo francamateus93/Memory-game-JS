@@ -127,27 +127,14 @@ function createGame(size) {
 createGame(4);
 
 
+// He agregado las siguientes características:
 
-// const totalCards = 12; // total de cards
-// // const availableCards = ['A', 'K', 'Q', 'J'];
+// La función flipCard ahora solo permite dar la vuelta a una carta si hay menos de dos cartas descubiertas.
 
-// let cards = []; // cards creados
-// let selectedCards = []; // cards selecionados
-// let valuesUsed = []; // valores de los cards
-// let currentMove = 0; // movimiento actual
-// let currentAttempts = 0; // tentativas actuales
+// La función checkMatched ahora llama a flipBack después de encontrar una pareja.
 
-// // define una variavel para DIV
-// let cardTemplate = '<div class="card"><div class="back"></div><div class="face"></div></div>';
+// La función flipBack marca las cartas como "no destapadas" si hemos destapado dos pero no son pareja.
 
-// for (let i=0; i < totalCards; i++) { // iteracion para crear cada carta
+// He agregado un estilo visual para las cartas pareadas con un borde verde y un icono ✅.
 
-//   let div = document.createElement('div'); // crea un 'div' en html
-
-//   div.innerHTML = cardTemplate; // añade al 'div' los cards template
-
-//   cards.push(div); // añade el 'div' al array cards
-
-//   document.querySelector('#js-game').append(cards[i]); // añade al GAME el array com cartas creadas
-//   // 
-// }
+// He agregado una función checkWin que verifica si se han encontrado todas las parejas y muestra un mensaje de felicitación cuando se complete el juego.

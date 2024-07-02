@@ -1,140 +1,116 @@
 // holds the deck of cards for the game
-let cards = [];
+let cards = []; 
+let flippedCards = []; 
+let matchedCards = 0; 
 
 // generates a new deck of cards, with size / 2 pairs, and shuffled
 function generateCards(size) {
-  const numPairs = size * size / 2;
-  const values = [...Array(numPairs).keys()].map(() => Math.floor(Math.random() * 8) + 1);
-  const cards = [];
-
-  for (let i = 0; i < size * size; i++) {
-    cards.push({
-      id: `card-${i}`,
-      value: values[Math.floor(i / 2)],
-      flipped: false,
-      matched: false
-    });
-  }
-
-  shuffle(cards);
-
-  return cards;
+    cards = [];
+    for (let i = 1; i <= size / 2; i++) { 
+        cards.push({ id: `${i}a`, value: i, flipped: false, matched: false });
+        cards.push({ id: `${i}b`, value: i, flipped: false, matched: false });
+    } 
+    shuffle(cards); 
 }
 
 // shuffles an array
 function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1)); 
+        [arr[i], arr[j]] = [arr[j], arr[i]]; 
+    }
 }
 
 // flips a card by id
 function flipCard(id) {
-  const card = cards.find((card) => card.id === id);
-  if (!card.flipped && card.matched) return;
-
-  card.flipped = true;
-  updateCards();
-}
-
-function updateCards() {
-  const cardsToFlip = cards.filter((card) => card.flipped);
-  cardsToFlip.forEach((card) => {
-    card.flipCard(card);
-  });
+    let card = cards.find(card => card.id === id);
+    if (card && !card.flipped && flippedCards.length < 2) { 
+        card.flipped = true; 
+        flippedCards.push(card); 
+        updateCards(); 
+        if (flippedCards.length === 2) { 
+            checkMatched(); 
+        }
+    }
 }
 
 // marks any flipped cards as matched if they match
 function checkMatched() {
-  const matchedCards = cards.filter((card) => card.matched);
-  if (matchedCards.length === size * size / 2) {
-    checkWin();
-  }
+    if (flippedCards[0].value === flippedCards[1].value) { 
+        flippedCards.forEach(card => card.matched = true); 
+        matchedCards += 2; 
+        flippedCards = []; 
+        checkWin(); 
+    } else {
+        setTimeout(flipBack, 1000);
+    }
 }
 
 // shows a message if the game is over
 function checkWin() {
-  alert("¡Felicidades! Has ganado el juego!");
+    if (matchedCards === cards.length) {
+        alert('¡Congratulations! ¡You Win! You have found all the pairs.');
+    }
 }
 
 // sets all flipped props to false except for the matched ones
 function flipBack() {
-  setTimeout(() => {
-    cards.forEach((card) => {
-      if (!card.matched && !card.flipped) {
-        card.flipped = false;
-      }
-    });
-    updateCards();
-  }, 1000);
+    flippedCards.forEach(card => card.flipped = false); 
+    flippedCards = []; 
+    updateCards(); 
 }
 
 // handles the click on a card
-document.addEventListener("click", (event) => {
-  if (event.target.classList.contains("card")) {
-    flipCard(event.target.id);
-    handleCardClick(event.target.id);
-  }
-});
-
-function handleCardClick(id) {
-  const card = cards.find((card) => card.id === id);
-  if (!card.flipped) return;
-
-  if (cards.find((otherCard) => otherCard.value === card.value && !otherCard.matched)) {
-    card.matched = true;
-    checkMatched();
-  } else {
-    flipBack();
-  }
+function handleCardClick(event) {
+    const id = event.currentTarget.dataset.id; 
+    flipCard(id);
 }
 
 // creates the DOM elements for the cards
 function showCards() {
-  const gridContainer = document.getElementById("grid");
-  gridContainer.innerHTML = "";
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
 
-  cards.forEach((card) => {
-    const cardElement = document.createElement("div");
-    cardElement.className = "card";
-    cardElement.id = card.id;
-    cardElement.innerHTML = `<div class="back" style="background-color: #fff;"></div><div class="front">${card.value}</div>`;
-    gridContainer.appendChild(cardElement);
-  });
+    cards.forEach(card => {
+        const cardElement = document.createElement('div');
+        cardElement.classList.add('card');
+        cardElement.dataset.id = card.id; 
+        cardElement.innerHTML = `
+            <div class="front"><img src="img/${card.value}.jpg" alt="Card ${card.value}" class="img-card"></div>
+            <div class="back"></div>
+        `;
+        cardElement.addEventListener('click', handleCardClick);
+        grid.appendChild(cardElement); 
+    });
 }
 
 // updates the classes on the card DOM elements based on the state of the cards
 function updateCards() {
-  cards.forEach((card) => {
-    if (card.flipped) {
-      cardElement.querySelector(".front").style.display = "block";
-      cardElement.querySelector(".back").style.display = "none";
-    } else {
-      cardElement.querySelector(".front").style.display = "none";
-      cardElement.querySelector(".back").style.display = "block";
-    }
-  });
+    cards.forEach(card => {
+        const cardElement = document.querySelector(`.card[data-id="${card.id}"]`);
+        if (card.flipped === true) {
+            cardElement.classList.add('flipped');
+        } else {
+            cardElement.classList.remove('flipped');
+        }
+        if (card.matched === true) {
+            cardElement.classList.add('matched');
+        }
+    });
 }
+
 
 // initializes the game
 function createGame(size) {
-  generateCards(size * size);
-  showCards();
+    generateCards(size); 
+    showCards(); 
+    matchedCards = 0; 
+    flippedCards = []; 
 }
 
+// Event listener for new game button
+document.getElementById('new-game').addEventListener('click', () => createGame(16));
+
+
 // INITIALIZE THE GAME WHEN THE PAGE LOADS
-createGame(4);
-
-
-// He agregado las siguientes características:
-
-// La función flipCard ahora solo permite dar la vuelta a una carta si hay menos de dos cartas descubiertas.
-
-// La función checkMatched ahora llama a flipBack después de encontrar una pareja.
-
-// La función flipBack marca las cartas como "no destapadas" si hemos destapado dos pero no son pareja.
-
-// He agregado un estilo visual para las cartas pareadas con un borde verde y un icono ✅.
-
-// He agregado una función checkWin que verifica si se han encontrado todas las parejas y muestra un mensaje de felicitación cuando se complete el juego.
+createGame(16);

@@ -6,17 +6,17 @@
 
   .gridGame {
     display: grid;
-    grid-template-columns: repeat(4, 100px);
-    grid-template-rows: repeat(4, 100px);
-    grid-gap: 30px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    grid-gap: 20px;
     justify-content: center;
     align-items: center;
   }
   
   .card {
     position: relative;
-    width: 100px;
-    height: 120px;
+    width: 6.7rem;
+    height: 8rem;
     cursor: pointer;
     transform-style: preserve-3d;
     transition: transform 0.5s;
@@ -39,14 +39,28 @@
 }
 
 .card .front {
-    background-color: #678db3a4;
+    border-radius: 10px;
     transform: rotateY(180deg);
 }
 
 .card .back {
-    background-color: #061524;
+    background-color: #10326e;
     color: #fff;
 }
+
+.card :hover {
+  transition: transform 0.1s;
+  background-color: rgba(27, 68, 140, 0.9);
+  color: #fff;
+}
+
+.img-card {
+  border-radius: 10px;
+}
+
+/* .card .matched {
+  border: 2px solid green;
+} */
 
 #new-game {
     padding: 10px 20px;

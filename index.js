@@ -6,15 +6,13 @@ let matchedCards = 0;
 // generates a new deck of cards, with size / 2 pairs, and shuffled
 function generateCards(size) {
     cards = [];
-
-    // itera desde el 1 hasta size
     for (let i = 1; i <= size / 2; i++) { 
 
-       // Se crea un objeto 'cards' adicional con el mismo valor y se agrega a la variable cards Esto se hace para generar pares de cartas.
+       // Se crea un objeto 'cards' adicional con el mismo valor y se agrega a la variable cards, se hace para generar pares de cartas.
         cards.push({ id: `${i}a`, value: i, flipped: false, matched: false });
         cards.push({ id: `${i}b`, value: i, flipped: false, matched: false });
     } 
-    shuffle(cards); // llama funcion 'shuffle' para mezclar las cartas en aleatorio
+    shuffle(cards); 
 }
 
 // El resultado es una baraja de cartas pares con los siguientes características:
@@ -25,18 +23,15 @@ function generateCards(size) {
 
 // shuffles an array
 function shuffle(arr) {
-
-    // itera sobre los elementos del array desde el último hasta el primer
     for (let i = arr.length - 1; i > 0; i--) {
 
         // utilizando Math.random() * (i + 1) = genera un número aleatorio entre 0 y el índice actual [i]
         const j = Math.floor(Math.random() * (i + 1)); 
-        [arr[i], arr[j]] = [arr[j], arr[i]]; // // intercambia los elementos del array en i y j
+        [arr[i], arr[j]] = [arr[j], arr[i]]; // intercambia los elementos del array en i y j
     }
 }
 
-// La función no devuelve nada, porque modifica el array original en lugar de crear un nuevo.
-// la funcion apenas mescla el array.
+// La función no devuelve nada, porque modifica el array original en lugar de crear un nuevo. la funcion apenas mescla el array.
 
 
 // flips a card by id
@@ -46,8 +41,7 @@ function flipCard(id) {
     let card = cards.find(card => card.id === id);
 
     // busca si es la carta y si no está flipada 
-    if (card && !card.flipped && flippedCards.length < 2) { // La carta no debe haber sido flipada anteriormente (!card.flipped) y la cant. de cartas flipadas no debe superar 2 (flippedCards.length < 2).
-
+    if (card && !card.flipped && flippedCards.length < 2) { // La carta no debe haber sido flipada antes y la cant. de cartas flipadas no debe superar 2
         card.flipped = true; // si dá match, flipa la carta
         flippedCards.push(card); // se añade la carta al array de cartas flipadas
         updateCards(); // llama la función para actualizar el estado de la carta
@@ -66,15 +60,15 @@ function checkMatched() {
     if (flippedCards[0].value === flippedCards[1].value) { // verifica si las cartas tienen el mismo .value
 
         flippedCards.forEach(card => card.matched = true); // llama metodo 'forEach' con funcion de estabelecer que el value .matched es igual true en las dos cartas
-        matchedCards += 2; // añade 2 al contador de matchedCards
+        matchedCards += 2; // incrementa en 2 el contador de matchedCards
         flippedCards = []; // añade las cartas al array de cartas flipadas
-        checkWin(); // chequear si has ganado
+        checkWin(); // chequear si has ganado el juego
     } else {
         setTimeout(flipBack, 1000); // si no son pares, llama el metodo para estabelecer un temporizador con funcion de volver a carta
     }
 }
 
-// verifica si las cartas flipadas tem el mesmo valor, si es verdade, encrementa en 2 el contador matchedCards. se limpia el arreglo flippedCards y chequeas si has ganado el juego.
+// verifica si las cartas flipadas tienen el mesmo valor, si es verdade, encrementa en 2 el contador matchedCards. limpia el array flippedCards y chequeas si has ganado el juego.
 
 
 // shows a message if the game is over
@@ -111,7 +105,7 @@ function showCards() {
         cardElement.classList.add('card');
         cardElement.dataset.id = card.id; // Se agrega un atributo data-id al elemento con el valor de la propiedad id de la carta.
         cardElement.innerHTML = `
-            <div class="front">${card.value}</div>
+            <div class="front"><img src="img/${card.value}.jpg" alt="Card ${card.value}" class="img-card"></div>
             <div class="back"></div>
         `;
         cardElement.addEventListener('click', handleCardClick); // Se agrega un evento de click a cada carta y llama la funcion handleCardClick para ejecutar cuando se clickie en la carta.
@@ -132,12 +126,8 @@ function updateCards() {
         } else {
             cardElement.classList.remove('flipped');
         }
-        if (card.matched === true) {
-            cardElement.classList.add('matched');
-        }
     });
 }
-
 
 // initializes the game
 function createGame(size) {
@@ -146,8 +136,6 @@ function createGame(size) {
     matchedCards = 0; // empezar el contador de cuántas cartas han sido pareja.
     flippedCards = []; // empezar el array que almacena las cartas flipadas.
 }
-
-// la funciona genera las cartas del juego, las enseña y inicia las variables globales 
 
 // Event listener for new game button
 document.getElementById('new-game').addEventListener('click', () => createGame(16));

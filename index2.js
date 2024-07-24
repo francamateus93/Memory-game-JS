@@ -14,8 +14,7 @@ function generateCards(size) {
 }
 
 // El resultado es una baraja de cartas pares con los siguientes características:
-// Cada carta tiene un valor entre 1 y size / 2.
-// Cada carta tiene un lado con id's diferentes.
+// Cada carta tiene un valor entre 1 y size / 2 y un lado con id's diferentes.
 // Todas las cartas inician no flipadas ni matched.
 
 // shuffles an array
@@ -119,7 +118,7 @@ function updateCards() {
     });
 }
 
-// actualiza la classe del las cartas en el DOM baseado en el estado de la carta
+// actualiza la classe del las cartas baseado en el estado de la carta
 
 // initializes the game
 function createGame(size) {

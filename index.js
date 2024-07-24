@@ -1,6 +1,6 @@
 // holds the deck of cards for the game
-let cards = []; // deck de las cartas
-let flippedCards = []; // cartas flipadas
+let cards = [];
+let flippedCards = [];
 let matchedCards = 0; 
 
 // generates a new deck of cards, with size / 2 pairs, and shuffled

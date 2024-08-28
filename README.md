@@ -1,148 +1,173 @@
 # 🧠 DOM Memory Game
 
-En esta actividad crearás un juego de memoria con DOM, HTML y CSS.
+The memory game involves players flipping over pairs of cards laid face down to find matches. The objective is to collect the most pairs by remembering the positions of the cards. The game continues until all pairs are found, with the player having the most pairs declared the winner. It enhances memory skills and provides social interaction, making it suitable for all ages.
 
-## Objetivos
+- We will create a memory game with 4 x 4 = 16 cards (decirally, 8 pairs).
+- The cards will be mixed randomly each time we start a new game.
+- The letters will be presented to the mouth below.
+- Clicking on a letter will take you back to showing its contents.
+- Click on two cards that form a pair and the cards will be discovered.
+- If we discover that the cards do not form a pair, the cards will automatically return to being lowered.
+- The game will end when all couples are discovered.
 
-- Manipular el DOM directamente, añadiendo y eliminando elementos.
-- Emplear CSS para dar estilos a los elementos de la página.
-- Añadir gestores de eventos (event handlers) para interactuar con las acciones que el usuario realice en la página.
-- Gestionar los datos del juego de forma ordenada y estructurada, separados de la visualización
-- Implementar la lógica de funcionamiento del juego de forma ordenada y estructurada, dividiendo el código en tantas funciones como sea necesario.
-- Separar la lógica de funcionamiento del código de la visualización.
+## Project goals
 
-## Configuración
+- Manipulate the DOM directly, adding and eliminating elements.
+- Use CSS to style page elements.
+- Add event managers (event handlers) to interact with the actions that the user takes on the page.
+- Manage game data in an orderly and structured way, separate from visualization - Implement game operating logic in an orderly and structured way, dividing the code into as many functions as necessary.
+- Separate the operating logic from the visualization code.
 
-- `npm install` para instalar Tailwind CSS.
-- `npm start` para inicializar el compilador de Tailwind CSS.
-- Abre `index.html` en el navegador con el Live Server de VS Code.
+## Softwares and Languages
 
-## Requisitos básicos
+- **Javascript**: (https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- **Tailwind**: (https://tailwindcss.com/)
+- **HTML**: (https://developer.mozilla.org/es/docs/Web/HTML)
+- **VSCode**: (https://code.visualstudio.com/)
 
-- Crearemos un juego de memoria con 4 x 4 = 16 cartas (es decir, 8 parejas).
-Las cartas estarán mezcladas de forma aleatoria cada vez que comencemos un juego nuevo.
-- Las cartas se presentarán boca abajo.
-- Hacer click en una carta le dará la vuelta para mostrar su contenido.
-- Hacer click en dos cartas que formen una pareja hará que las cartas queden descubiertas.
-- Si descubrimos dos cartas que no forman una pareja, las cartas volverán a mostrarse boca abajo automáticamente.
-- El juego se terminará cuando todos los parejas estén descubiertas.
+## Getting Started
 
-### 1. Preparación de la pelea
+To run the project locally, follow the steps below:
 
-- [ ] Completa la función `generateCards`.
+1. **Clone the repository**:
 
-- Esta función recibe un tamaño `size` y genera una baraja de cartas con `size` / 2 parejas.
-- Utiliza al menos un loop para generar las cartas.
-- La baraja de cartas se guarda en la variable global `cards`.
-- Cada carta tiene un `id` único y un valor de 1 a 8 (por parejas). Es decir, la baraja contendrá dos cartas con el valor 1, dos con el valor 2, etc. hasta el valor 8.
-- Puedes generar las cartas de forma ordenada y después utilizar la función `shuffle` para mezclar la baraja (ver siguiente punto).
+```bash
+git clone https://github.com/francamateus93/memory-game.git
+cd memory-game
+```
 
-- [ ] Completa la función `shuffle`.
+2. **Install the dependencies**:
 
-- Esta función recibe un array y ordena sus elementos de forma aleatoria.
-- Utiliza un loop descendente utilizando una variable `i`. Selecciona una posición aleatoria `j` entre 0 y `i` e intercambia los elementos de la posición seleccionada `j` con la posición `i`. Esta operación se repite hasta que todos los elementos del array han sido intercambiados.
-- Utiliza la función [`Math.random`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) para seleccionar un número aleatoriamente.
-- Utiliza la función [`Math.floor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor) para redondear el número aleatorio.
+```bash
+npm install
+```
 
-### 2. Mostrar la pelea
+3. **Run the application**:
 
-![Mostrar la pelea](img/img1.png)
+```bash
+npm run dev
+```
 
-- [ ] Crear la cuadrícula
+4. **Acess**: Open your web browser and go to `http://localhost:8080` to see the application in action.
 
-- Genera un contenedor grid de 4 x 4 en el archivo HTML
-- Este grid deberá estar posicionado en el centro de la página
+## Project Requirements
 
-- [ ] Completa la función `showCards`.
+### 1. Preparing the cards
 
-- Genera un elemento `div` para cada carta de la baraja, y muéstralo dentro del grid. Da al elemento una clase CSS `card`.
-- El contenido del `div` es el valor de la carta.
+- [ ] Complete the `generateCards` function.
 
-- [ ] Añade un botón "New Game".
+- This function receives a size `size` and generates a deck of cards with `size` / 2 pairs.
+- Use at least one loop to generate the cards.
+- The deck of cards is stored in the global variable `cards`.
+- Each card has a unique `id` and a value from 1 to 8 (in pairs). That is, the deck will contain two cards with the value 1, two with the value 2, etc. up to the value 8.
+- You can generate the cards in an ordered way and then use the `shuffle` function to shuffle the deck (see next point).
 
-- Hacer click en este botón tendrá que crear un juego nuevo.
+- [ ] Complete the `shuffle` function.
 
-- [ ] Da estilos visuales al juego
-- El estilo es libre. Hazlo como quieras.
+- This function receives an array and orders its elements randomly.
+- Use a descending loop using a variable `i`. Select a random position `j` between 0 and `i` and swap the elements of the selected position `j` with position `i`. This operation is repeated until all elements of the array have been swapped.
+- Use the [`Math.random`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) function to select a random number.
+- Use the [`Math.floor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/floor) function to round the random number.
 
-### 3. Dar la vuelta a las cartas
+### 2. Showing the fight
 
-![Dar la vuelta a las cartas](img/img2.png)
+- [ ] Create the grid
 
-- [ ] Marca las cartas como descubiertas.
+- Generate a 4 x 4 grid container in the HTML file
+- This grid should be positioned in the center of the page
 
- - Hacer click en una carta debe marcarla como "descubrimiento". Utiliza `handleCardClick` como gestor del evento `click` de la carta.
- - Añade una nueva propiedad a cada objeto carta si lo necesitas.
- - Completa la función `flipCard` para ello.
+- [ ] Complete the `showCards` function.
 
-- [ ] Visualiza la cara y el reverso de cada carta
+- Generate a `div` element for each card in the deck, and display it inside the grid. Give the element a CSS class of `card`.
+- The content of the `div` is the value of the card.
 
- - Ahora mismo estamos mostrando un número por cada carta.
- - En lugar de ello, debería mostrarse el contenido de la carta sólo cuando ésta está descubierta.
- - Por eso, haremos que el elemento visual que muestra la carta contenga dos elementos:
- - Un elemento `div` con una clase `back` que contendrá un color de fondo.
- - Un elemento `div` con una clase `front` que contendrá el valor de la carta.
- - Para no mostrar nunca el valor y el reverso de la carta a la vez, hacemos que los elementos `back` y `front` tengan una posición `absolute` y que el elemento `card` tenga una posición `relative` .
- - En lugar de mostrar un número, muestra una imagen. Puedes utilizar tus propias imágenes (denomina los archivos `1.png`, `2.png`, etc.) para una fácil identificación. También puedes utilizar imágenes de [Lorem Picsum](https://picsum.photos/) u otro servicio.
+- [ ] Add a "New Game" button.
 
-- [ ] Completa la función `updateCards`.
+- Clicking this button will create a new game.
 
- - Esta función debe añadir o quitar la clase `flipped` a cada carta, en función de su estado (si está descubierta o no).
- - Selecciona todas las cartas del DOM, y para cada una de ellas, comprueba si la carta está o no descubierta (mirando al array `cards`).
- - Al hacer click en cada carta, además de marcarla como descubrimiento, debe llamarse la función `updateCards` para actualizar su visualización.
+- [ ] Give the game visual styles
+- The style is free. Do it however you want.
 
-- [ ] Agregar estilos
- - Cuando una carta tiene la clase `flipped`, debería verse sólo el `frente` de la carta.
- - Cuando una carta no tiene la clase `flipped`, debería verse sólo el `back` de la carta.
- - Puedes crear un efecto visual para ello utilizando la propiedad CSS `transform` y aplicando una rotación [`rotateY`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform- function/rotateY). Combina las rotaciones de `0deg` y `180deg` en los elementos `front` y `back` para crear el efecto de girar una carta. Para no mostrar la parte trasera de un elemento HTML, utiliza la propiedad [`backface-visibility: hidden;`](https://developer.mozilla.org/en-US/docs/Web/CSS/backface -visibility)
- - Utiliza [`transition`](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions) para animar el efecto de rotación de cada carta.
+### 3. Flipping cards
 
-### 4. Aplica la lógica del juego al código
+- [ ] Mark cards as face up.
 
-![Cartas pareadas](img/img3.png)
+- Clicking on a card should mark it as "face up". Use `handleCardClick` as a handler for the card's `click` event.
+- Add a new property to each card object if you need to.
+- Complete the `flipCard` function for this.
 
-- [ ] Sólo dos cartas pueden ser descubiertas al mismo tiempo.
+- [ ] Display the face and back of each card
 
- - Hazlo en la función `flipCard`. Asegúrate de dar la vuelta a una carta sólo si hay menos de dos cartas descubiertas.
+- Right now we are displaying a number for each card.
+- Instead, the content of the card should be displayed only when the card is face up.
+- So, we'll make the visual element that displays the card contain two elements:
+- A `div` element with a `back` class that will hold a background color.
+- A `div` element with a `front` class that will hold the value of the card.
+- To never display the value and the back of the card at the same time, we make the `back` and `front` elements have an `absolute` position and the `card` element have a `relative` position.
+- Instead of displaying a number, display an image. You can use your own images (name the files `1.png`, `2.png`, etc.) for easy identification. You can also use images from [Lorem Picsum](https://picsum.photos/) or another service.
 
-- [ ] Marca las cartas como `matched` cuando se han encontrado.
+- [ ] Complete the `updateCards` function.
 
- - Completa la función `checkMatched` para ello. Esta función debe llamarse cada vez que damos la vuelta a una carta.
- - Añade una nueva propiedad a cada objeto carta si lo necesitas.
- - Hemos encontrado una pareja si tenemos dos cartas descorchadas y su valor es el mismo.
- - Si hemos encontrado una pareja, las cartas deben marcarse como `matched`.
- - En la función `flipCard`, deberás tener en cuenta las cartas que ya han sido `matched`.
+- This function should add or remove the `flipped` class to each card, depending on its state (whether it's flipped or not).
+- Select all cards in the DOM, and for each card, check whether or not the card is uncovered (by looking at the `cards` array).
+- When clicking on each card, in addition to marking it as uncovered, the `updateCards` function should be called to update its display.
 
-- [ ] Vuelve a tapar las cartas
+- [ ] Adding styles
+- When a card has the `flipped` class, only the `front` of the card should be visible.
+- When a card does not have the `flipped` class, only the `back` of the card should be visible.
+- You can create a visual effect for this by using the CSS `transform` property and applying a rotation [`rotateY`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotateY). Combine the `0deg` and `180deg` rotations on the `front` and `back` elements to create the effect of flipping a card. To not show the back of an HTML element, use the [`backface-visibility: hidden;`](https://developer.mozilla.org/en-US/docs/Web/CSS/backface-visibility) property
+- Use [`transition`](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions) to animate the flipping effect of each card.
 
- - Completa la función `flipBack` para ello.
- - Esta función marca las cartas como "no destapadas" si hemos destapado dos pero no son pareja.
- - No tengas en cuenta las cartas `matched` como cartas destapadas.
- - Esta función debe llamarse automáticamente al cabo de un segundo de destapar cada carta, utilizando la función [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout ).
+### 4. Apply game logic to your code
 
-- [ ] Añade un estilo visual para las cartas pareadas
+- [ ] Only two cards can be flipped at a time.
 
- - Puedes remarcar el borde con un color diferente, mostrar un icono ✅ o algún otro elemento visual.
+- Do this in the `flipCard` function. Make sure to flip a card only if there are less than two cards flipped.
 
-- [ ] Comprueba si se han encontrado todas las parejas
+- [ ] Mark cards as `matched` when they have been found.
 
- - Cada vez que se haga click, comprobar si hemos terminado el juego.
- - Hemos terminado el juego si todas las cartas han sido emparejadas.
- - Muestra un mensaje de felicitación cuando el juego haya terminado.
+- Complete the `checkMatched` function for this. This function should be called every time we flip a card.
+- Add a new property to each card object if you need it.
+- We have found a match if we have two uncorked cards and their value is the same.
 
-### 5. Mejora el juego (OPCIONAL)
+### 4. Apply game logic to your code
 
-- [ ] Añade un contador de "número de movimientos".
-- [ ] Añade un contador de tiempo.
-- [ ] ...
+- [ ] Only two cards can be uncovered at a time.
 
-## Recursos
+- Do this in the `flipCard` function. Make sure to flip a card only if there are less than two cards uncovered.
 
-- [MDL - Manipulating the DOM Guide](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents)
-- [Plain JS - Common DOM Manipulation methods](https://plainjs.com/javascript/manipulation/)
-- [Eloquent JavaScript - The DOM](https://eloquentjavascript.net/14_dom.html)
-- [Eloquent JavaScript - Handling Events](https://eloquentjavascript.net/15_event.html)
+- [ ] Mark cards as `matched` when they have been found.
 
-## Notas
+- Complete the `checkMatched` function for this. This function should be called every time we flip a card.
+- Add a new property to each card object if you need to.
+- We have found a match if we have two cards uncovered and their value is the same.
+- If we have found a match, the cards should be marked as `matched`.
+- In the `flipCard` function, you should take into account the cards that have already been `matched`.
 
-_Este es un proyecto de estudiante creado en [CodeOp](http://CodeOp.tech), en el bootcamp de Front End Development en Barcelona._
+- [ ] Flip the cards back over
+
+- Complete the `flipBack` function for this.
+- This function marks cards as "unfaced" if we have unfaced two but they are not a match.
+- Do not count `matched` cards as face-up cards.
+- This function should be called automatically within one second of each card being unfaced, using the [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/setTimeout) function.
+
+- [ ] Add a visual style for matched cards
+
+- You can highlight the border with a different color, show a ✅ icon, or some other visual element.
+
+- [ ] Check if all matches have been found
+
+- Each time you click, check if we have finished the game.
+- We have finished the game if all cards have been matched.
+- Show a congratulatory message when the game is over.
+
+## Resources
+
+- [MDL - Manipulating the DOM Guide] (https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents)
+- [Plain JS - Common DOM Manipulation methods] (https://plainjs.com/javascript/manipulation/)
+- [Eloquent JavaScript - The DOM] (https://eloquentjavascript.net/14_dom.html)
+- [Eloquent JavaScript - Handling Events] (https://eloquentjavascript.net/15_event.html)
+
+## Notes
+
+_This is a student project created at [CodeOp](http://CodeOp.tech), at the Front End Development bootcamp in Barcelona._

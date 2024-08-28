@@ -33,7 +33,6 @@ To run the project locally, follow the steps below:
 
 ```bash
 git clone https://github.com/francamateus93/memory-game.git
-cd memory-game
 ```
 
 2. **Install the dependencies**:
@@ -48,7 +47,9 @@ npm install
 npm run dev
 ```
 
-4. **Acess**: Open your web browser and go to `http://localhost:8080` to see the application in action.
+4. **Tailwind Installation**: https://tailwindcss.com/docs/installation
+
+5. **Acess**: Open your web browser and go to `http://localhost:8080` to see the application in action.
 
 ## Project Requirements
 
